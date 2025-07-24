@@ -18,7 +18,7 @@ class CategoryController extends Controller
             })
             ->paginate(15);
 
-        return view('categories.index', [
+        return view('admin.categories.index', [
             'categories' => $categories
         ]);
     }
@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class CategoryController extends Controller
         Category::create($attributes);
 
         return redirect()
-            ->route('categories.index')
+            ->route('admin.categories.index')
             ->with('success', 'Kategori berhasil ditambahkan.');
     }
 
@@ -53,7 +53,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('categories.show', [
+        return view('admin.categories.show', [
             'category' => $category,
             'products' => $category->products
         ]);
@@ -64,7 +64,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categories.edit', [
+        return view('admin.categories.edit', [
             'category' => $category
         ]);
     }
@@ -82,7 +82,7 @@ class CategoryController extends Controller
         $category->update($attributes);
 
         return redirect()
-            ->route('categories.index')
+            ->route('admin.categories.index')
             ->with('success', 'Kategori berhasil diedit.');
     }
 
@@ -94,7 +94,7 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()
-            ->route('categories.index')
+            ->route('admin.categories.index')
             ->with('success', 'Kategori berhasil dihapus.');
     }
 }

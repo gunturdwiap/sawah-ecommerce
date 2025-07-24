@@ -29,7 +29,8 @@
                             }
                         }">
 
-                        <form method="post" action="{{ route('categories.update', $category) }}" class="mt-6 space-y-6">
+                        <form method="post" action="{{ route('admin.categories.update', $category) }}"
+                            class="mt-6 space-y-6">
                             @csrf
                             @method('PUT')
 

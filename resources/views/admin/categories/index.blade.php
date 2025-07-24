@@ -50,7 +50,7 @@
                                 <div
                                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
 
-                                    <a href="{{ route('categories.create') }}">
+                                    <a href="{{ route('admin.categories.create') }}">
                                         <x-primary-button type="button"
                                             class="flex items-center justify-center font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
                                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -91,13 +91,13 @@
                                                         {{-- <a href="#" class="font-medium text-blue-600 hover:underline">
                                                             Detail
                                                         </a> --}}
-                                                        <a href="{{ route('categories.edit', ['category' => $category->id]) }}"
+                                                        <a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}"
                                                             class="font-medium text-yellow-600 hover:underline">
                                                             Edit
                                                         </a>
 
                                                         <form method="POST"
-                                                            action="{{ route('categories.destroy', $category) }}"
+                                                            action="{{ route('admin.categories.destroy', $category) }}"
                                                             class="inline">
                                                             @csrf
                                                             @method('DELETE')
