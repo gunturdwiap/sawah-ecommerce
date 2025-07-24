@@ -28,6 +28,10 @@ Route::prefix('/admin')->middleware(['auth', IsAdmin::class])->group(function ()
 
 });
 
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
+
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
