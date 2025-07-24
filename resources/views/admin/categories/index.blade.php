@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('List Produk') }}
+            {{ __('List Kategori') }}
         </h2>
     </x-slot>
 
@@ -50,14 +50,14 @@
                                 <div
                                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
 
-                                    <a href="{{ route('admin.products.create') }}">
+                                    <a href="{{ route('admin.categories.create') }}">
                                         <x-primary-button type="button"
                                             class="flex items-center justify-center font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
                                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                                 <path clip-rule="evenodd" fill-rule="evenodd"
                                                     d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                             </svg>
-                                            Tambah Produk
+                                            Tambah Kategori
                                         </x-primary-button>
                                     </a>
 
@@ -70,36 +70,34 @@
                                     <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                                         <tr>
                                             <th scope="col" class="px-4 py-3">Nama</th>
-                                            <th scope="col" class="px-4 py-3">Harga</th>
-                                            <th scope="col" class="px-4 py-3">Deskripsi</th>
-                                            <th scope="col" class="px-4 py-3">Gambar</th>
+                                            <th scope="col" class="px-4 py-3">Slug</th>
                                             <th scope="col" class="px-4 py-3">Terakhir Diedit</th>
                                             <th scope="col" class="px-4 py-3"><span class="sr-only">Actions</span></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($products as $product)
+                                        @forelse ($categories as $category)
                                             <tr class="border-b border-gray-200">
                                                 <th scope="row"
                                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                                    {{ $product->name }}
+                                                    {{ $category->name }}
                                                 </th>
-                                                <td class="px-4 py-3">{{ $product->price }}</td>
-                                                <td class="px-4 py-3">{{ $product->description }}</td>
-                                                <td class="px-4 py-3">
-                                                <img src="{{ asset('storage/' . $product->image) }}" alt="Product image" class="w-32 h-auto rounded">
-                                                </td>
-                                                <td class="px-4 py-3">{{ $product->updated_at->diffForHumans() }}</td>
+                                                <td class="px-4 py-3">{{ $category->slug }}</td>
+                                                <td class="px-4 py-3">{{ $category->updated_at->diffForHumans() }}</td>
                                                 <td class="px-4 py-3 text-right">
                                                     <!-- Placeholder for action buttons -->
                                                     <div class="flex gap-3 items-center justify-end">
-                                                        <a href="{{ route('admin.products.edit', ['product' => $product->id]) }}"
+
+                                                        {{-- <a href="#" class="font-medium text-blue-600 hover:underline">
+                                                            Detail
+                                                        </a> --}}
+                                                        <a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}"
                                                             class="font-medium text-yellow-600 hover:underline">
                                                             Edit
                                                         </a>
 
                                                         <form method="POST"
-                                                            action="{{ route('admin.products.destroy', $product) }}"
+                                                            action="{{ route('admin.categories.destroy', $category) }}"
                                                             class="inline">
                                                             @csrf
                                                             @method('DELETE')
@@ -125,7 +123,59 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $products->links() }}
+
+                            <!-- Pagination -->
+                            {{-- <nav
+                                class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+                                aria-label="Table navigation">
+                                <span class="text-sm font-normal text-gray-500">
+                                    Showing <span class="font-semibold text-gray-900">1-10</span> of
+                                    <span class="font-semibold text-gray-900">1000</span>
+                                </span>
+                                <ul class="inline-flex items-stretch -space-x-px">
+                                    <li>
+                                        <a href="#"
+                                            class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
+                                            <span class="sr-only">Previous</span>
+                                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
+                                                viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 01-1.414 0l4-4a1 1 0 011.414 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">2</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" aria-current="page"
+                                            class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-blue-600 bg-blue-50 border border-blue-300 hover:bg-blue-100 hover:text-blue-700">3</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">...</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
+                                            <span class="sr-only">Next</span>
+                                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
+                                                viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav> --}}
+                            {{ $categories->links() }}
 
                         </div>
                     </div>
