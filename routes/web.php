@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,5 +27,11 @@ Route::prefix('/admin')->middleware(['auth', IsAdmin::class])->group(function ()
         ->name('admin.index');
 
 });
+
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+
+Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+
+
 
 require __DIR__.'/auth.php';
