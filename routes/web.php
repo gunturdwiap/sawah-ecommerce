@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
@@ -19,11 +20,12 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::prefix('/admin')->middleware(['auth', IsAdmin::class])->group(function () {
+Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::get('/', fn () => 'Secret admin panel')
         ->name('admin.index');
 
+    Route::resource('categories', CategoryController::class);
 });
 
 require __DIR__.'/auth.php';
