@@ -14,7 +14,7 @@
 
                         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                             @foreach($products as $product)
-                                <a href="#" class="group">
+                                <a href="{{ route('products.product-detail', ['id' => $product->id]) }}" class="group">
                                     @if($product->image)
                                         <img src="{{ asset($product->image) }}"
                                              alt="{{ $product->name }}"
