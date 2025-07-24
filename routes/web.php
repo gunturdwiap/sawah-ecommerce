@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::prefix('/admin')->middleware('auth')->group(function () {
+Route::prefix('/admin')->middleware(['auth', IsAdmin::class])->group(function () {
 
     Route::get('/', fn () => 'Secret admin panel')
         ->name('admin.index');
