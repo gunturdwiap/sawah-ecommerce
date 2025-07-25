@@ -9,10 +9,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 @if($product->image)
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
-                    class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8">
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                        class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8">
                 @else
-                    <div class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8 flex items-center justify-center">
+                    <div
+                        class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8 flex items-center justify-center">
                     </div>
                 @endif
             </div>
@@ -24,19 +25,19 @@
                         {{ $product->category->name }}
                     </span>
                 @endif
-                <p class="text-xl text-green-600 font-semibold mb-2">Rp {{ number_format($product->price, 0, ',', '.') }}
+                <p class="text-xl text-green-600 font-semibold mb-2">Rp
+                    {{ number_format($product->price, 0, ',', '.') }}
                 </p>
                 <p class="text-gray-700 mb-6 leading-relaxed">{{ $product->description }}</p>
-                {{-- <a href="#"
-                    class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition">
-                    Add to Cart
-                </a> --}}
-                <form action="{{ route('cart.store', $product) }}" method="POST" class="mt-4">
-                    @csrf
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
-                        Add to Cart
-                    </button>
-                </form>
+
+                @if (!auth()?->user()?->is_admin)
+                    <form action="{{ route('cart.store', $product) }}" method="POST" class="mt-4">
+                        @csrf
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+                            Add to Cart
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>
