@@ -34,7 +34,7 @@ class CartController extends Controller
 
     public function destroy(Request $request, Cart $cart)
     {
-        abort_if($request->user()->is_admin, 403);
+        abort_if($request->user()->is_admin || $request->user()->id !== $cart->user_id, 403);
 
         $cart->delete();
         return back()->with('success', 'Produk dihapus dari keranjang');
