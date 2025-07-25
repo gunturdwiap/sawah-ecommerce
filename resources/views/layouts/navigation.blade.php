@@ -31,10 +31,10 @@
                             </x-nav-link>
 
                         @else
-                            <x-nav-link :href="route('cart.index')" :active="request()->routeIs('home')">
+                            <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.*')">
                                 {{ __('Cart') }}
                             </x-nav-link>
-                            <x-nav-link :href="route('orders.index')" :active="request()->routeIs('home')">
+                            <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
                                 {{ __('Orders') }}
                             </x-nav-link>
 
@@ -85,7 +85,7 @@
 
                                 <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
-                                                                                                                                                                    this.closest('form').submit();">
+                                                                                                                                                                                this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
@@ -130,10 +130,10 @@
                     </x-responsive-nav-link>
 
                 @else
-                    <x-nav-link :href="route('cart.index')" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.*')">
                         {{ __('Cart') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
                         {{ __('Orders') }}
                     </x-nav-link>
                 @endif
@@ -168,7 +168,7 @@
 
                         <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
-                                                                                                                                        this.closest('form').submit();">
+                                                                                                                                                    this.closest('form').submit();">
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
                     </form>

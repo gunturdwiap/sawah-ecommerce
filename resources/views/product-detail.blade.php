@@ -6,6 +6,12 @@
     </x-slot>
 
     <div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+        @if (session()->has('success'))
+            <div class="p-4 mb-4 text-sm text-green-800 bg-green-50" role="alert">
+                <span class="font-medium">Sukses!</span>
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 @if($product->image)
