@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Models\Category;
 use App\Models\Product;
 use App\Http\Middleware\IsAdmin;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
@@ -18,15 +19,25 @@ Route::get('/', function () {
     return redirect()->route('products.index');
 })->name('home');
 
-Route::get('/products', function () {
-    $products = Product::all();
+Route::get('/products', function (Request $request) {
+    $products = Product::query()
+        ->when($request->filled('q'), function ($q) use ($request) {
+            $q->where('name', 'like', '%'.$request->string('q').'%');
+        })->get();
+
     return view('home', compact('products'));
 })->name('products.index');
+
 Route::get('/products/{id}', [ProductController::class, 'show'])
     ->name('products.product-detail');
 Route::get('/categories/{category:slug}/products', function (Request $request, Category $category) {
+    $products = $category->products()
+        ->when($request->filled('q'), function ($q) use ($request) {
+            $q->where('name', 'like', '%'.$request->string('q').'%');
+        })->get();
+
     return view('home', [
-        'products' => $category->products,
+        'products' => $products,
         'category' => $category
     ]);
 })->name('categories.products');
