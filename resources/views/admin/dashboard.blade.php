@@ -9,47 +9,41 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("Welcome, Admin!") }}
-                </div>
-
-                {{-- Static Dashboard Content --}}
-                <div class="p-6 bg-gray-100 font-sans leading-normal tracking-normal">
                     <!-- Stats Cards -->
                     <section class="grid gap-4 md:grid-cols-4 mb-6">
-                        <div class="bg-blue-600 text-white p-6 rounded-xl">
+                        <div class="shadow-md border border-l-4 border-l-blue-600 p-6 rounded-xl">
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-semibold">Total Akun</span>
+                                <span class="text-lg font-semibold">Jumlah User</span>
                             </div>
-                            <div class="text-5xl font-bold mt-2">120</div>
+                            <div class="text-5xl font-bold mt-2">{{ $totals['users'] }}</div>
                         </div>
 
-                        <div class="bg-yellow-500 text-white p-6 rounded-xl">
+                        <div class="shadow-md border border-l-4 border-l-yellow-500 p-6 rounded-xl">
                             <div class="flex justify-between items-center">
                                 <span class="text-lg font-semibold">Jumlah Produk </span>
                             </div>
-                            <div class="text-5xl font-bold mt-2">45</div>
+                            <div class="text-5xl font-bold mt-2">{{ $totals['products'] }}</div>
                         </div>
 
-                        <div class="bg-green-500 text-white p-6 rounded-xl">
+                        <div class="shadow-md border border-l-4 border-l-green-500 p-6 rounded-xl">
                             <div class="flex justify-between items-center">
                                 <span class="text-lg font-semibold">Jumlah Kategori</span>
                             </div>
-                            <div class="text-5xl font-bold mt-2">33</div>
+                            <div class="text-5xl font-bold mt-2">{{ $totals['categories'] }}</div>
                         </div>
 
-                        <div class="bg-red-600 text-white p-6 rounded-xl">
+                        <div class="shadow-md border border-l-4 border-l-red-600 p-6 rounded-xl">
                             <div class="flex justify-between items-center">
                                 <span class="text-lg font-semibold">Jumlah Order </span>
-                                🏢
                             </div>
-                            <div class="text-5xl font-bold mt-2">20</div>
+                            <div class="text-5xl font-bold mt-2">{{ $totals['orders'] }}</div>
                         </div>
                     </section>
 
                     <!-- Charts and Quota -->
                     <section class="grid md:grid-cols-4 gap-4">
                         <!-- Chart -->
-                        <div class="md:col-span-3 bg-white p-6 rounded-xl shadow">
+                        <div class="md:col-span-3 shadow-md border bg-white p-6 rounded-xl">
                             <h2 class="text-lg font-semibold mb-4">Laporan Bulanan </h2>
                             <div class="relative h-64">
                                 <canvas id="barChart" class="w-full h-full"></canvas>
@@ -57,7 +51,7 @@
                         </div>
 
                         <!-- Kuota -->
-                        <div class="bg-white p-6 rounded-xl shadow">
+                        <div class="bg-white p-6 rounded-xl shadow-md border">
                             <h2 class="text-lg font-semibold mb-4">Jumlah Produk</h2>
                             <div class="space-y-4">
                                 <div>
@@ -92,6 +86,7 @@
                     </section>
                 </div>
 
+
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <script>
                     const ctx = document.getElementById('barChart').getContext('2d');
@@ -103,7 +98,7 @@
                                 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
                             ],
                             datasets: [{
-                                label: 'Jumlah Presensi Mahasiswa',
+                                label: 'Jumlah Order',
                                 data: [15, 20, 35, 40, 50, 55, 60, 50, 30, 25, 10, 5],
                                 backgroundColor: '#2b7fff',
                             }]
