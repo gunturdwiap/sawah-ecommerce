@@ -4,13 +4,19 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\IsAdmin;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
-
 /**
  * Public Routes
  */
-Route::get('/', [ProductController::class, 'index'])
-    ->name('home');
+Route::get('/', function () {
+    return redirect()->route('products.index');
+})->name('home');
+
+Route::get('/products', function () {
+    $products = Product::all();
+    return view('dashboard', compact('products'));
+})->name('products.index');
 Route::get('/products/{id}', [ProductController::class, 'show'])
     ->name('products.product-detail');
 
