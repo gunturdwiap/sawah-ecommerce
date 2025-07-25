@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        abort_if($request->user()->is_admin, 403);
+
         $orders = Auth::user()->orders()->with('product')->latest()->get();
         return view('user.order', compact('orders'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        abort_if($request->user()->is_admin, 403);
+
         $user = Auth::user();
         $cartItems = $user->carts()->with('product')->get();
 
