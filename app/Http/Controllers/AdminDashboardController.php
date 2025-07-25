@@ -27,7 +27,6 @@ class AdminDashboardController extends Controller
             ->groupBy('category_id')
             ->get();
 
-        dump($productsByCategory);
         return view('admin.dashboard', [
             'totals' => $totals,
             'productsByCategory' => $productsByCategory

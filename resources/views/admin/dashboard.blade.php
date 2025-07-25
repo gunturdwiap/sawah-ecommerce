@@ -83,7 +83,7 @@
                                 @foreach ($productsByCategory as $product)
                                     <div>
                                         <div class="flex justify-between text-sm">
-                                            <span>{{ $product->category ?? 'Tanpa Kategori' }}</span>
+                                            <span>{{ $product->category?->name ? Str::limit($product->category->name, 25) : 'Tanpa Kategori' }}</span>
                                             <span>{{ $product->total }} / {{ $totals['products'] }}</span>
                                         </div>
                                         <div class="w-full bg-gray-200 rounded-full h-2">
