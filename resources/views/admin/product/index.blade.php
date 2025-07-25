@@ -71,6 +71,7 @@
                                         <tr>
                                             <th scope="col" class="px-4 py-3">Nama</th>
                                             <th scope="col" class="px-4 py-3">Harga</th>
+                                            <th scope="col" class="px-4 py-3">Kategori</th>
                                             <th scope="col" class="px-4 py-3">Deskripsi</th>
                                             <th scope="col" class="px-4 py-3">Gambar</th>
                                             <th scope="col" class="px-4 py-3">Terakhir Diedit</th>
@@ -85,6 +86,7 @@
                                                     {{ $product->name }}
                                                 </th>
                                                 <td class="px-4 py-3">{{ $product->price }}</td>
+                                                <td class="px-4 py-3">{{ $product->category?->name ?? 'Tidak ada kategori' }}</td>
                                                 <td class="px-4 py-3">{{ $product->description }}</td>
                                                 <td class="px-4 py-3">
                                                 <img src="{{ asset('storage/' . $product->image) }}" alt="Product image" class="w-32 h-auto rounded">

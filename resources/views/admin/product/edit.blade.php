@@ -49,6 +49,20 @@
                             </div>
 
                             <div>
+                                <x-input-label for="categories" :value="__('Kategori')" />
+                                <select name="category_id" id=""  class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                   >
+                                   <option disabled> Pilih Kategori</option>
+                                   @foreach ($categories as $item)
+                                        <option value="{{ $item->id }}" {{ old('category_id', $product->category_id ?? '') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <x-input-error class="mt-2" :messages="$errors->get('category_id')" />
+                            </div>
+
+                            <div>
                                 <x-input-label for="image" :value="__('Photo Produk')" />
                                 @if ($product->image)
                                     <div class="mt-2">
