@@ -26,7 +26,8 @@
                                     @endif
                                     <h3 class="mt-4 text-sm text-gray-700">{{ $product->name }}</h3>
                                     <p class="mt-1 text-lg font-medium text-gray-900">Rp
-                                        {{ number_format($product->price, 0, ',', '.') }}</p>
+                                        {{ number_format($product->price, 0, ',', '.') }}
+                                    </p>
                                 </a>
                             @endforeach
                         </div>
