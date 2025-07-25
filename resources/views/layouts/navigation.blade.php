@@ -12,26 +12,24 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+                        {{ __('Home') }}
+                    </x-nav-link>
                     @auth
 
-                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
                         @if (auth()->user()->is_admin)
+                            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                                {{ __('Dashboard') }}
+                            </x-nav-link>
                             <x-nav-link :href="route('admin.categories.index')"
                                 :active="request()->routeIs('admin.categories.*')">
                                 {{ __('Kategori') }}
                             </x-nav-link>
 
-                            {{-- TODO --}}
-                            <x-nav-link :href="route('admin.categories.index')"
-                                :active="request()->routeIs('admin.categories.*')">
+                            <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
                                 {{ __('Produk') }}
                             </x-nav-link>
-                            <x-nav-link :href="route('admin.categories.index')"
-                                :active="request()->routeIs('admin.categories.*')">
-                                {{ __('User') }}
-                            </x-nav-link>
+
                         @endif
                     @endauth
                 </div>
@@ -79,7 +77,7 @@
 
                                 <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
-                                                                                                                            this.closest('form').submit();">
+                                                                                                                                                                    this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
@@ -109,24 +107,20 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @auth
-                <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                    {{ __('Home') }}
-                </x-responsive-nav-link>
                 @if (auth()->user()->is_admin)
+                    <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                        {{ __('Home') }}
+                    </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('categories')">
                         {{ __('Kategori') }}
                     </x-responsive-nav-link>
-
-                    {{-- TODO --}}
-                    <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('categories')">
+                    <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('products')">
                         {{ __('Produk') }}
                     </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('categories')">
-                        {{ __('User') }}
-                    </x-responsive-nav-link>
+
                 @endif
             @endauth
 
@@ -159,7 +153,7 @@
 
                         <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
-                                                                                                this.closest('form').submit();">
+                                                                                                                                        this.closest('form').submit();">
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
                     </form>
