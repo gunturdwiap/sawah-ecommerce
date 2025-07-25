@@ -110,7 +110,7 @@
                                 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
                             ],
                             datasets: [{
-                                label: 'Jumlah Order',
+                                label: 'Jumlah Pembelian Produk',
                                 data: [15, 20, 35, 40, 50, 55, 60, 50, 30, 25, 10, 5],
                                 backgroundColor: '#2b7fff',
                             }]
