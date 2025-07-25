@@ -30,6 +30,14 @@
                                 {{ __('Produk') }}
                             </x-nav-link>
 
+                        @else
+                            <x-nav-link :href="route('cart.index')" :active="request()->routeIs('home')">
+                                {{ __('Cart') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('orders.index')" :active="request()->routeIs('home')">
+                                {{ __('Orders') }}
+                            </x-nav-link>
+
                         @endif
                     @endauth
                 </div>
@@ -121,6 +129,13 @@
                         {{ __('Produk') }}
                     </x-responsive-nav-link>
 
+                @else
+                    <x-nav-link :href="route('cart.index')" :active="request()->routeIs('home')">
+                        {{ __('Cart') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('home')">
+                        {{ __('Orders') }}
+                    </x-nav-link>
                 @endif
             @endauth
 

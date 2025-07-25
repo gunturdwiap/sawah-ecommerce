@@ -27,10 +27,16 @@
                 <p class="text-xl text-green-600 font-semibold mb-2">Rp {{ number_format($product->price, 0, ',', '.') }}
                 </p>
                 <p class="text-gray-700 mb-6 leading-relaxed">{{ $product->description }}</p>
-                <a href="#"
+                {{-- <a href="#"
                     class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition">
                     Add to Cart
-                </a>
+                </a> --}}
+                <form action="{{ route('cart.store', $product) }}" method="POST" class="mt-4">
+                    @csrf
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        Add to Cart
+                    </button>
+                </form>
             </div>
         </div>
     </div>
