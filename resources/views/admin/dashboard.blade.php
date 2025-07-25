@@ -69,7 +69,7 @@
                     <section class="grid md:grid-cols-4 gap-4">
                         <!-- Chart -->
                         <div class="md:col-span-3 shadow-md border bg-white p-6 rounded-xl">
-                            <h2 class="text-lg font-semibold mb-4">Laporan Bulanan </h2>
+                            <h2 class="text-lg font-semibold mb-4">Laporan Penjualan Bulanan </h2>
                             <div class="relative h-64">
                                 <canvas id="barChart" class="w-full h-full"></canvas>
                             </div>
@@ -77,35 +77,22 @@
 
                         <!-- Kuota -->
                         <div class="bg-white p-6 rounded-xl shadow-md border">
-                            <h2 class="text-lg font-semibold mb-4">Jumlah Produk</h2>
+                            <h2 class="text-lg font-semibold mb-4">Jumlah Produk Tiap Kategori</h2>
                             <div class="space-y-4">
-                                <div>
-                                    <div class="flex justify-between text-sm">
-                                        <span>Produk A</span>
-                                        <span>15 / 20</span>
+
+                                @foreach ($productsByCategory as $product)
+                                    <div>
+                                        <div class="flex justify-between text-sm">
+                                            <span>{{ $product->category ?? 'Tanpa Kategori' }}</span>
+                                            <span>{{ $product->total }} / {{ $totals['products'] }}</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-blue-500 h-2 rounded-full"
+                                                style="width: {{ $product->total / $totals['products'] * 100 }}%"></div>
+                                        </div>
                                     </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-2">
-                                        <div class="bg-blue-500 h-2 rounded-full" style="width: 75%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between text-sm">
-                                        <span>Produk B</span>
-                                        <span>10 / 10</span>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-2">
-                                        <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between text-sm">
-                                        <span>Produk C</span>
-                                        <span>5 / 20</span>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-2">
-                                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 25%"></div>
-                                    </div>
-                                </div>
+                                @endforeach
+
                             </div>
                         </div>
                     </section>

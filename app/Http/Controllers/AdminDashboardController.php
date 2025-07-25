@@ -22,11 +22,15 @@ class AdminDashboardController extends Controller
             'orders' => 0
         ];
 
-        // $productsCount = Product::groupBy()
+        $productsByCategory = Product::with('category')
+            ->select('category_id', \DB::raw('count(*) as total'))
+            ->groupBy('category_id')
+            ->get();
 
-
+        dump($productsByCategory);
         return view('admin.dashboard', [
             'totals' => $totals,
+            'productsByCategory' => $productsByCategory
         ]);
     }
 }
