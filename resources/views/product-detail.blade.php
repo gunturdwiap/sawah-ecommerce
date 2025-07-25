@@ -21,9 +21,11 @@
             <div>
                 <h1 class="text-3xl font-bold mb-2 text-gray-800">{{ $product->name }}</h1>
                 @if($product->category)
-                    <span class="inline-block bg-gray-200 text-gray-800 text-xs px-3 py-1 rounded-full mb-2">
-                        {{ $product->category->name }}
-                    </span>
+                    <a href="{{ route('categories.products', ['category' => $product->category->slug]) }}">
+                        <span class="inline-block bg-gray-200 text-gray-800 text-xs px-3 py-1 rounded-full mb-2">
+                            {{ $product->category->name }}
+                        </span>
+                    </a>
                 @endif
                 <p class="text-xl text-green-600 font-semibold mb-2">Rp
                     {{ number_format($product->price, 0, ',', '.') }}

@@ -1,8 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Products') }}
+            {{ __('Produk') }}
         </h2>
+        <p>
+            Kategori : {{ $category->name ?? 'Semua' }}
+        </p>
     </x-slot>
 
     <div class="py-12">

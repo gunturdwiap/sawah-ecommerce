@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminDashboardController;
+use App\Models\Category;
 use App\Models\Product;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+
 /**
  * Public Routes
  */
@@ -22,7 +24,12 @@ Route::get('/products', function () {
 })->name('products.index');
 Route::get('/products/{id}', [ProductController::class, 'show'])
     ->name('products.product-detail');
-
+Route::get('/categories/{category:slug}/products', function (Request $request, Category $category) {
+    return view('home', [
+        'products' => $category->products,
+        'category' => $category
+    ]);
+})->name('categories.products');
 /**
  * User Routes
  */
