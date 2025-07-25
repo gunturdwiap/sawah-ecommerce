@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -34,13 +35,17 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('admin.product.create');
+        $category = Category::all();
+        return view('admin.product.create', ['categories' => $category]);
     }
 
     public function edit(Product $product)
     {
+
+        $category = Category::all();
         return view('admin.product.edit', [
-            'product' => $product
+            'product' => $product,
+            'categories' => $category
         ]);
     }
 
@@ -60,6 +65,7 @@ class ProductController extends Controller
             'name' => ['required','string','max:100'],
             'price' => ['required','numeric','min:0'],
             'description' => ['required','string','max:1000'],
+            'category_id' => ['required','numeric','exists:categories,id'],
             'image' => ['required','image','mimes:jpg,jpeg,png,webp','max:2048']
         ]);
 
@@ -74,14 +80,15 @@ class ProductController extends Controller
             ->with('success', 'Produk berhasil ditambahkan.');
     }
 
-    public function update(Request $request, Product $product) 
+    public function update(Request $request, Product $product)
     {
 
         $attributes = $request->validate([
-            'name' => 'required|string|max:100', 
+            'name' => 'required|string|max:100',
             'price' => 'required|numeric|min:0',
             'description' => 'required|string|max:1000',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', 
+            'category_id' => 'required|numeric|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
@@ -93,11 +100,11 @@ class ProductController extends Controller
         } else {
             $attributes['image'] = $product->image;
         }
+        $product->update($attributes);
 
-        $product->update($attributes); 
-
+        // dd($product);
         return redirect()
-            ->route('admin.products.index') 
+            ->route('admin.products.index')
             ->with('success', 'Produk berhasil diperbarui.');
         }
 
