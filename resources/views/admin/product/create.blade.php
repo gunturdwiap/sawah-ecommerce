@@ -28,7 +28,7 @@
                             <div>
                                 <x-input-label for="name" :value="__('Nama Produk')" />
                                 <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" required
-                                    autofocus autocomplete="name"/> 
+                                    autofocus autocomplete="name"/>
                                 <x-input-error class="mt-2" :messages="$errors->get('name')" />
                             </div>
 
@@ -40,6 +40,18 @@
                             </div>
 
                             <div>
+                                <x-input-label for="categories" :value="__('Kategori')" />
+                                <select name="category_id" id=""  class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                   >
+                                   <option disabled selected> Pilih Kategori</option>
+                                    @foreach ($categories as $item)
+                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
+                                </select>
+                                <x-input-error class="mt-2" :messages="$errors->get('categories')" />
+                            </div>
+
+                            <div>
                                 <x-input-label for="description" :value="__('Deskripsi')" />
                                 <textarea id="description" name="description" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required
                                     autocomplete="description">{{ old('description', '') }}</textarea>
@@ -47,7 +59,7 @@
                             </div>
 
                             <div>
-                                <x-input-label for="image" :value="__('Photo')" /> 
+                                <x-input-label for="image" :value="__('Photo')" />
                                 <x-text-input id="image" name="image" type="file" class="w-full border px-3 py-2 rounded" required
                                     autocomplete="image" accept="image/*" />
                                 <x-input-error class="mt-2" :messages="$errors->get('image')" />

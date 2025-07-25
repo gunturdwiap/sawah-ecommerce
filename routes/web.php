@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Models\Product;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ Route::get('/', function () {
 
 Route::get('/products', function () {
     $products = Product::all();
-    return view('dashboard', compact('products'));
+    return view('home', compact('products'));
 })->name('products.index');
 Route::get('/products/{id}', [ProductController::class, 'show'])
     ->name('products.product-detail');
@@ -46,9 +47,8 @@ Route::prefix('/admin')
     ->name('admin.')
     ->group(function () {
 
-        Route::get('/', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
+        Route::get('/', AdminDashboardController::class)
+            ->name('dashboard');
 
         // Route::controller(ProductController::class)->group(function () {
         //     Route::get('/products', 'products')->name('products.index');
