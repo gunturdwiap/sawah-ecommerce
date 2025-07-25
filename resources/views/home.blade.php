@@ -46,7 +46,18 @@
                                             class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8 flex items-center justify-center">
                                         </div>
                                     @endif
-                                    <h3 class="mt-4 text-sm text-gray-700">{{ $product->name }}</h3>
+
+                                    <div class="flex justify-between items-center mt-3">
+                                        <h3 class="text-sm text-gray-700">{{ $product->name }}</h3>
+                                        @if($product->category)
+                                            <button>
+                                                <span class="bg-gray-200 text-gray-800 text-xs px-3 py-1 rounded-full mb-2">
+                                                    {{ $product->category->name }}
+                                                </span>
+                                            </button>
+                                        @endif
+                                    </div>
+
                                     <p class="mt-1 text-lg font-medium text-gray-900">Rp
                                         {{ number_format($product->price, 0, ',', '.') }}
                                     </p>
