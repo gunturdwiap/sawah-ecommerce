@@ -35,6 +35,16 @@ Route::prefix('/admin')
             return view('admin.dashboard');
         })->name('dashboard');
 
+        // Route::controller(ProductController::class)->group(function () {
+        //     Route::get('/products', 'products')->name('products.index');
+        //     Route::get('/products/create', 'create')->name('products.create');
+        //     Route::post('/products', 'store')->name('products.store');
+        //     Route::get('/products/{id}/edit', 'edit')->name('products.edit');
+        //     Route::put('/products/{product}', 'update')->name('products.update');
+        //     Route::delete('/products/{id}', 'destroy')->name('products.destroy');
+        // });
+        Route::resource('products', ProductController::class);
+
         Route::resource('categories', CategoryController::class);
     });
 
