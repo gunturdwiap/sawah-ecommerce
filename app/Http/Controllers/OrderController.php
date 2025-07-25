@@ -4,40 +4,71 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index(Request $request)
     {
-        abort_if($request->user()->is_admin, 403);
+        $orders = Order::query()
+            ->with(['product', 'user'])
+            ->when($request->filled('q'), function ($q) use ($request) {
+                $q->where('name', 'like', '%'.$request->string('q').'%');
+            })
+            ->paginate(15);
 
-        $orders = Auth::user()->orders()->with('product')->latest()->get();
-        return view('user.order', compact('orders'));
-    }
-
-    public function store(Request $request)
-    {
-        abort_if($request->user()->is_admin, 403);
-
-        $user = Auth::user();
-        $cartItems = $user->carts()->with('product')->get();
-
-        if ($cartItems->isEmpty()) {
-            return back()->with('error', 'Keranjang kosong');
-        }
-
-        foreach ($cartItems as $item) {
-            Order::create([
-                'user_id' => $user->id,
-                'product_id' => $item->product_id,
-                'quantity' => $item->quantity,
-                'price' => $item->product->price
+            return view('admin.orders.index', [
+                'orders' => $orders
             ]);
-        }
-
-        $user->carts()->delete();
-
-        return redirect()->route('orders.index')->with('success', 'Pesanan berhasil dibuat');
     }
+
+    // /**
+    //  * Show the form for creating a new resource.
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
+
+    // /**
+    //  * Store a newly created resource in storage.
+    //  */
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
+
+    // /**
+    //  * Display the specified resource.
+    //  */
+    // public function show(string $id)
+    // {
+    //     //
+    // }
+
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  */
+    // public function edit(string $id)
+    // {
+    //     //
+    // }
+
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
+    // public function update(Request $request, string $id)
+    // {
+    //     //
+    // }
+
+    // /**
+    //  * Remove the specified resource from storage.
+    //  */
+    // public function destroy(string $id)
+    // {
+    //     //
+    // }
 }

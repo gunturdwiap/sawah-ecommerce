@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,8 +19,7 @@ class AdminDashboardController extends Controller
             'users' => User::count(),
             'products' => Product::count(),
             'categories' => Category::count(),
-            // TODO
-            'orders' => 0
+            'orders' => Order::count()
         ];
 
         $productsByCategory = Product::with('category')

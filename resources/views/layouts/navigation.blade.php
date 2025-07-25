@@ -29,13 +29,15 @@
                             <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
                                 {{ __('Produk') }}
                             </x-nav-link>
-
+                            <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                                {{ __('Order') }}
+                            </x-nav-link>
                         @else
                             <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.*')">
                                 {{ __('Cart') }}
                             </x-nav-link>
                             <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
-                                {{ __('Orders') }}
+                                {{ __('Order') }}
                             </x-nav-link>
 
                         @endif
@@ -85,7 +87,7 @@
 
                                 <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
-                                                                                                                                                                                this.closest('form').submit();">
+                                                                                                                                                                                                        this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
@@ -128,14 +130,18 @@
                     <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('products')">
                         {{ __('Produk') }}
                     </x-responsive-nav-link>
+                    <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                        {{ __('Order') }}
+                    </x-nav-link>
 
                 @else
                     <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.*')">
                         {{ __('Cart') }}
                     </x-nav-link>
                     <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
-                        {{ __('Orders') }}
+                        {{ __('Order') }}
                     </x-nav-link>
+
                 @endif
             @endauth
 
@@ -168,7 +174,7 @@
 
                         <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
-                                                                                                                                                    this.closest('form').submit();">
+                                                                                                                                                                            this.closest('form').submit();">
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
                     </form>

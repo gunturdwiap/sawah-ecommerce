@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\OrderController;
 use App\Models\Category;
 use App\Models\Product;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserOrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
@@ -41,6 +42,7 @@ Route::get('/categories/{category:slug}/products', function (Request $request, C
         'category' => $category
     ]);
 })->name('categories.products');
+
 /**
  * User Routes
  */
@@ -53,8 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
     Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
 
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    Route::get('/orders', [UserOrderController::class, 'index'])->name('orders.index');
+    Route::post('/orders', [UserOrderController::class, 'store'])->name('orders.store');
 });
 
 /**
@@ -71,6 +73,10 @@ Route::prefix('/admin')
         Route::resource('products', ProductController::class);
 
         Route::resource('categories', CategoryController::class);
+
+        // Route::resource('orders', OrderController::class);
+        Route::get('/orders', [OrderController::class, 'index'])
+            ->name('orders.index');
     });
 
 require __DIR__.'/auth.php';
